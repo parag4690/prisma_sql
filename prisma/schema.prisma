@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://sharmaparag4690:KoFag5MOEr8S@ep-misty-lab-a57frkof-pooler.us-east-2.aws.neon.tech/lect1?sslmode=require"
+}
+
+
+// one to many ( todo )
+
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  todo Todo[] 
+}
+
+
+model Todo {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  userid Int
+  user User @relation(fields:[userid] , references:[id])   
+}
+
+// relation => why in Todo table => jis table me forien key h udher relation bnana hai ( jese userid forien key hai )
